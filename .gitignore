@@ -1,0 +1,4 @@
+/bin/phpunit
+/build/
+composer.phar
+/vendor/

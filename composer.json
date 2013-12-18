@@ -1,0 +1,20 @@
+{
+    "name": "jcarouth/testing-ood",
+    "description": "Sample repo for Guiding Object-Oriented Design with tests",
+    "require": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeff Carouth",
+            "email": "jcarouth@gmail.com"
+        }
+    ],
+    "config": {
+      "bin-dir": "bin/"
+    },
+    "autoload": {
+      "psr-0": {"": "src"}
+    }
+}
