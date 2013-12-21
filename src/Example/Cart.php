@@ -9,6 +9,14 @@ namespace Example;
  */
 class Cart
 {
+    /** @var array */
+    private $contents;
+
+    public function __construct()
+    {
+        $this->contents = array();
+    }
+
     /**
      * Returns the number of items currently in the cart
      *
@@ -16,6 +24,16 @@ class Cart
      */
     public function count()
     {
-        return 0;
+        return count($this->contents);
+    }
+
+    /**
+     * Adds an item to the cart
+     *
+     * @return void
+     */
+    public function addItem($item)
+    {
+        $this->contents[] = $item;
     }
 }
