@@ -1,25 +1,34 @@
 <?php
 class CartTest extends \PHPUnit_Framework_TestCase
 {
+    private $cart;
+
+    public function setUp()
+    {
+        $this->cart = new \Example\Cart();
+    }
+
+    public function tearDown()
+    {
+        $this->cart = null;
+    }
+
     public function testCartIsInitiallyEmpty()
     {
-        $cart = new \Example\Cart();
-        $this->assertEquals(0, $cart->count());
+        $this->assertEquals(0, $this->cart->count());
     }
 
     public function testCanAddOneProductToCart()
     {
-        $cart = new \Example\Cart();
-        $cart->addItem(new \Example\Product());
-        $this->assertEquals(1, $cart->count());
+        $this->cart->addItem(new \Example\Product());
+        $this->assertEquals(1, $this->cart->count());
     }
 
     public function testCanAddManyProductsToCart()
     {
-        $cart = new \Example\Cart();
-        $cart->addItem(new \Example\Product());
-        $cart->addItem(new \Example\Product());
-        $cart->addItem(new \Example\Product());
-        $this->assertEquals(3, $cart->count());
+        $this->cart->addItem(new \Example\Product());
+        $this->cart->addItem(new \Example\Product());
+        $this->cart->addItem(new \Example\Product());
+        $this->assertEquals(3, $this->cart->count());
     }
 }
