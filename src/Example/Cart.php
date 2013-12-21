@@ -7,7 +7,7 @@ namespace Example;
  * Represents a storage container for shopper to keep a collection
  * of items he or she wants to purchase.
  */
-class Cart
+class Cart implements \Countable
 {
     /** @var array */
     private $contents;

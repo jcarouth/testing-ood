@@ -13,15 +13,20 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $this->cart = null;
     }
 
+    public function testCartIsACountableObject()
+    {
+        $this->assertInstanceOf('Countable', $this->cart);
+    }
+
     public function testCartIsInitiallyEmpty()
     {
-        $this->assertEquals(0, $this->cart->count());
+        $this->assertEquals(0, count($this->cart));
     }
 
     public function testCanAddOneProductToCart()
     {
         $this->cart->addItem(new \Example\Product());
-        $this->assertEquals(1, $this->cart->count());
+        $this->assertEquals(1, count($this->cart));
     }
 
     public function testCanAddManyProductsToCart()
@@ -29,6 +34,6 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $this->cart->addItem(new \Example\Product());
         $this->cart->addItem(new \Example\Product());
         $this->cart->addItem(new \Example\Product());
-        $this->assertEquals(3, $this->cart->count());
+        $this->assertEquals(3, count($this->cart));
     }
 }
