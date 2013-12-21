@@ -12,6 +12,9 @@ class Cart implements \Countable
     /** @var array */
     private $contents;
 
+    /** @var Promotion */
+    private $promotion;
+
     public function __construct()
     {
         $this->contents = array();
@@ -38,6 +41,16 @@ class Cart implements \Countable
     }
 
     /**
+     * Sets promotion on cart
+     *
+     * @return void
+     */
+    public function setPromotion($promotion)
+    {
+        $this->promotion = $promotion;
+    }
+
+    /**
      * Sums the prices of all items for the Cart's subtotal
      *
      * @return int
@@ -49,5 +62,22 @@ class Cart implements \Countable
             $runningTotal += $item->getPrice();
         }
         return $runningTotal;
+    }
+
+    public function total()
+    {
+        $runningTotal = 0;
+        foreach ($this->contents as $item) {
+            $runningTotal += $this->applyPromotion($item);
+        }
+        return $runningTotal;
+    }
+
+    private function applyPromotion($item)
+    {
+        if (null === $this->promotion) {
+            return $item->getPrice();
+        }
+        return $this->promotion->applyTo($item);
     }
 }
