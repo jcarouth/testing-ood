@@ -25,38 +25,41 @@ class CartTest extends \PHPUnit_Framework_TestCase
 
     public function testCanAddOneProductToCart()
     {
-        $this->cart->addItem(new \Example\Product());
+        $this->cart->addItem($this->product(300));
         $this->assertEquals(1, count($this->cart));
     }
 
     public function testCanAddManyProductsToCart()
     {
-        $this->cart->addItem(new \Example\Product());
-        $this->cart->addItem(new \Example\Product());
-        $this->cart->addItem(new \Example\Product());
+        $this->cart->addItem($this->product(500));
+        $this->cart->addItem($this->product(500));
+        $this->cart->addItem($this->product(500));
         $this->assertEquals(3, count($this->cart));
     }
 
     public function testSubtotalIsSumOfItemPrices()
     {
-        $productOne = $this->getMockBuilder('\\Example\\Product')
-            ->setMethods(array('getPrice'))
-            ->getMock();
-
-        $productOne->expects($this->any())
-            ->method('getPrice')
-            ->will($this->returnValue(1500));
-
-        $productTwo = $this->getMockBuilder('\\Example\\Product')
-            ->setMethods(array('getPrice'))
-            ->getMock();
-
-        $productTwo->expects($this->any())
-            ->method('getPrice')
-            ->will($this->returnValue(2000));
-
-        $this->cart->addItem($productOne);
-        $this->cart->addItem($productTwo);
+        $this->cart->addItem($this->product(1500));
+        $this->cart->addItem($this->product(2000));
         $this->assertEquals(3500, $this->cart->subtotal());
+    }
+
+    private function product($price = 0, $methods = array('getPrice'))
+    {
+        if (!is_array($methods)) {
+            $methods = array();
+        }
+
+        $product = $this->getMockBuilder('\\Example\\Product')
+            ->setMethods($methods)
+            ->getMock();
+
+        if (in_array('getPrice', $methods)) {
+            $product->expects($this->any())
+                ->method('getPrice')
+                ->will($this->returnValue($price));
+        }
+
+        return $product;
     }
 }
