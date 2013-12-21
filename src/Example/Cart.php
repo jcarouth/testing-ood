@@ -32,7 +32,7 @@ class Cart implements \Countable
      *
      * @return void
      */
-    public function addItem($item)
+    public function addItem(Sellable $item)
     {
         $this->contents[] = $item;
     }

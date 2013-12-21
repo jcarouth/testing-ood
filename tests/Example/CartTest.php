@@ -50,7 +50,7 @@ class CartTest extends \PHPUnit_Framework_TestCase
             $methods = array();
         }
 
-        $product = $this->getMockBuilder('\\Example\\Product')
+        $product = $this->getMockBuilder('\\Example\\Sellable')
             ->setMethods($methods)
             ->getMock();
 
