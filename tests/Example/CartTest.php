@@ -36,4 +36,11 @@ class CartTest extends \PHPUnit_Framework_TestCase
         $this->cart->addItem(new \Example\Product());
         $this->assertEquals(3, count($this->cart));
     }
+
+    public function testSubtotalIsSumOfItemPrices()
+    {
+        $this->cart->addItem(new \Example\Product(1500));
+        $this->cart->addItem(new \Example\Product(2000));
+        $this->assertEquals(3500, $this->cart->subtotal());
+    }
 }

@@ -36,4 +36,18 @@ class Cart implements \Countable
     {
         $this->contents[] = $item;
     }
+
+    /**
+     * Sums the prices of all items for the Cart's subtotal
+     *
+     * @return int
+     */
+    public function subtotal()
+    {
+        $runningTotal = 0;
+        foreach ($this->contents as $item) {
+            $runningTotal += $item->getPrice();
+        }
+        return $runningTotal;
+    }
 }
